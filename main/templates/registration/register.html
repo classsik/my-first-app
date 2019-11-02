@@ -1,0 +1,16 @@
+{% extends "layout/base.html" %}
+{% load bootstrap4 %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="border-bottom register mt-2 text-center">
+  <h1>Регистрация нового пользователя.</h1>
+</div>
+<div class="container-fluid mx-auto mb-3 mt-2">
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal'%}
+    <button type="submit" class="btn btn-info btn-block">Создать</button>
+  </form>
+</div>
+{% endblock %}

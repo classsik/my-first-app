@@ -1,0 +1,4 @@
+*.pyc
+*~
+school.data
+__pycache__

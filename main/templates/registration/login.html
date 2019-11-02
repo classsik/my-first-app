@@ -1,0 +1,16 @@
+{% extends  'layout/base.html' %}
+{% load bootstrap4 %}
+{% block title %}Вход{% endblock %}
+{% block main %}
+<div class="card text-center bg-light mt-4">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Войдите чтобы продолжить</h4>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {% bootstrap_form form %}
+      <button type="submit" class="btn btn-info btn-block mt-4">Войти</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
