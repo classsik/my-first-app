@@ -15,7 +15,8 @@ from django.core.paginator import Paginator
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'main/index.html')
+        last = News.objects.order_by("-id")[0:5]
+        return render(request, 'main/index.html', {'last': last})
     else:
         return HttpResponseRedirect("accounts/login/")
 

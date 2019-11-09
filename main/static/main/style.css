@@ -30,3 +30,9 @@
 .news-text, .news-body, .about, .password, .register, .index, .detail{
   font-family: 'Comfortaa', cursive;
 }
+
+@media (max-width: 575.98px) {
+  .info-text{
+    font-size: 35px !important;
+  }
+}
