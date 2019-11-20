@@ -13,6 +13,7 @@
         <h4 class="card-header">
           {{ new.title }}
         </h4>
+        {% if new.image %}<img class="card-img-top" src="{{ new.image.url }}" alt="Card image cap">{% endif %}
         <div class="card-body">
           <p class="card-text">{{ new.body|truncatewords:5 }}</p>
           <a href="{% url 'main:news_detail' pk=new.pk %}" class="btn btn-info">Подробнее</a>

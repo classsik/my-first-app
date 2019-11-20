@@ -5,7 +5,7 @@ class News(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Заголовок новости')
     body = models.TextField(db_index=True, verbose_name='Содержание новости')
     published = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
-
+    image = models.ImageField(upload_to='news/%Y/%m/%d', blank=True)
     def __str__(self):
         return self.title
 
