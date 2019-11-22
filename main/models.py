@@ -1,5 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 class News(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Заголовок новости')
@@ -30,3 +31,19 @@ class Shedule(models.Model):
     class Meta:
         verbose_name = 'Расписание'
         verbose_name_plural = 'Расписание'
+
+class Comment(models.Model):
+    news = models.ForeignKey(News, related_name='comments', on_delete=models.CASCADE)
+    name = models.ForeignKey(User, related_name='name', on_delete=models.PROTECT, verbose_name='Автор')
+    body = models.TextField(verbose_name='Текст')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    active = models.BooleanField(default=True, verbose_name='Активный?')
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name, self.news)

@@ -12,6 +12,8 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from .models import News, Shedule
 from django.core.paginator import Paginator
+from .models import Comment
+from .forms import CommentForm
 
 def index(request):
     if request.user.is_authenticated:
@@ -78,7 +80,23 @@ def news_list(request):
 
 def news_detail(request, pk):
     news = get_object_or_404(News, pk=pk)
-    return render(request, 'main/news_detail.html', {'news': news})
+    comments = news.comments.filter(active=True)
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.news = news
+
+            new_comment.name = request.user
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request, 'main/news_detail.html', {'news': news, 'comments': comments, 'comment_form': comment_form})
 
 def lessons_shedule(request):
     shedule = Shedule.objects.all()

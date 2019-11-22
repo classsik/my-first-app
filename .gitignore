@@ -2,3 +2,5 @@
 *~
 school.data
 __pycache__
+settings.py
+migrations/

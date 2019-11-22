@@ -2,9 +2,44 @@
 {% block title %}{{ news.title }}{% endblock %}
 {% block content %}
 <div class="text-center detail">
-  <div class="border-bottom">
+  <div class="border-bottom mt-2">
     <h1>{{ news.title }}</h1>
   </div>
-  <p>{{ news.body }}</p>
+  <div class='row justify-content-center mx-auto'>
+    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-4 col-xl-4 mt-2">
+        {% if news.image %}<img src="{{news.image.url}}" class='w-100 rounded'>{% endif %}
+    </div>
+  </div>
+  <p class='mt-1'>{{ news.body }}</p>
+  <p class='text-muted'>{{ news.published }}</p>
+</div>
+<div class="border-top mb-1"></div>
+<div class="commentaries">
+  {% with comments.count as total_comments %}
+    <h2 class='text-center'>Комментарии: {{ total_comments }}</h2>
+  {% endwith %}
+  {% for comment in comments %}
+    <div class="comment">
+      <p class="info">
+        {{ comment.name }}
+        {{ comment.created }}
+      </p>
+      {{ comment.body|linebreaks }}
+    </div>
+  {% empty %}
+    <p class='text-center'>Нет комментариев.</p>
+  {% endfor %}
+
+  {% if new_comment %}
+    <h2>Комментарий добавлен.</h2>
+  {% else %}
+    <h2 class='text-center mt-2'>Добавить новый комментарий</h2>
+    <h5 class='text-center'>Введите текст комментария</h5>
+    <form action="." method="post" class='text-center'>
+      {{ comment_form.body }}
+      {% csrf_token %}
+      <p  class='text-center'><input type="submit" value="Добавить"></p>
+    </form>
+  {% endif %}
 </div>
 {% endblock %}
