@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, Shedule, Comment
+from .models import News, Shedule, Comment, Call
 
 def deactivate(self, request, queryset):
     queryset.update(active='False')
@@ -20,3 +20,4 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'body', 'published')
 admin.site.register(News, NewsAdmin)
 admin.site.register(Shedule)
+admin.site.register(Call)

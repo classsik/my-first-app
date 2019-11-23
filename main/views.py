@@ -12,7 +12,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from .models import News, Shedule
 from django.core.paginator import Paginator
-from .models import Comment
+from .models import Comment, Call
 from .forms import CommentForm
 
 def index(request):
@@ -101,3 +101,7 @@ def news_detail(request, pk):
 def lessons_shedule(request):
     shedule = Shedule.objects.all()
     return render(request, 'main/shedule.html', {'shedule': shedule})
+
+def call_shedule(request):
+    call = Call.objects.all()
+    return render(request, 'main/call.html', {'call': call})

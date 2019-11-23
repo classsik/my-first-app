@@ -26,8 +26,12 @@
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'main:shedule' %}">Расписание</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Расписания</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+              <a class="dropdown-item" href="{% url 'main:shedule' %}">Расписание уроков</a>
+              <a class="dropdown-item" href="{% url 'main:call' %}">Расписание звонков</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'main:news' %}">Новости</a>

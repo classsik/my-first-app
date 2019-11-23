@@ -47,3 +47,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.news)
+
+class Call(models.Model):
+    lesson = models.IntegerField(verbose_name='Урок', default='1')
+    start = models.TimeField(verbose_name='Время начала')
+    end = models.TimeField(verbose_name='Время окончания')
+
+    class Meta:
+        verbose_name = 'Расписание звонков'
+        verbose_name_plural = 'Расписание звонков'
+
+    def __str__(self):
+        return 'Call on {} lesson'.format(self.lesson)
