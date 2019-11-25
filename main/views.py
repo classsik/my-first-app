@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from django.template import TemplateDoesNotExist
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -78,10 +78,36 @@ def news_list(request):
 
     return render(request, 'main/news.html', context=context)
 
+
+
+
+def like_news(request):
+    news = get_object_or_404(News, id=request.POST.get('id'))
+    is_liked = False
+    if news.likes.filter(id=request.user.id).exists():
+        news.likes.remove(request.user)
+        is_liked = False
+    else:
+        news.likes.add(request.user)
+        is_liked = True
+    context = {
+        'news': news,
+        'is_liked': is_liked,
+        'total_likes': news.total_likes(),
+    }
+    if request.is_ajax():
+        html = render_to_string('main/like_section.html', context, request=request)
+        return JsonResponse({'form': html})
+
+
+
+
 def news_detail(request, pk):
     news = get_object_or_404(News, pk=pk)
     comments = news.comments.filter(active=True)
-
+    is_liked = False
+    if news.likes.filter(id=request.user.id).exists():
+        is_liked = True
     if request.method == 'POST':
         # A comment was posted
         comment_form = CommentForm(data=request.POST)
@@ -96,7 +122,7 @@ def news_detail(request, pk):
             new_comment.save()
     else:
         comment_form = CommentForm()
-    return render(request, 'main/news_detail.html', {'news': news, 'comments': comments, 'comment_form': comment_form})
+    return render(request, 'main/news_detail.html', {'news': news, 'comments': comments, 'comment_form': comment_form, 'is_liked': is_liked, 'total_likes': news.total_likes()})
 
 def lessons_shedule(request):
     shedule = Shedule.objects.all()

@@ -7,8 +7,12 @@ class News(models.Model):
     body = models.TextField(db_index=True, verbose_name='Содержание новости')
     published = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     image = models.ImageField(upload_to='news/%Y/%m/%d', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
     def __str__(self):
         return self.title
+
+    def total_likes(self):
+        return self.likes.count() 
 
     class Meta:
         verbose_name_plural = 'Новости'
