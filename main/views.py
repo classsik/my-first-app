@@ -106,6 +106,7 @@ def news_detail(request, pk):
     news = get_object_or_404(News, pk=pk)
     comments = news.comments.filter(active=True)
     is_liked = False
+    new_comment = None
     if news.likes.filter(id=request.user.id).exists():
         is_liked = True
     if request.method == 'POST':
@@ -122,7 +123,7 @@ def news_detail(request, pk):
             new_comment.save()
     else:
         comment_form = CommentForm()
-    return render(request, 'main/news_detail.html', {'news': news, 'comments': comments, 'comment_form': comment_form, 'is_liked': is_liked, 'total_likes': news.total_likes()})
+    return render(request, 'main/news_detail.html', {'news': news, 'comments': comments, 'comment_form': comment_form, 'is_liked': is_liked, 'total_likes': news.total_likes(), 'new_comment': new_comment})
 
 def lessons_shedule(request):
     shedule = Shedule.objects.all()
