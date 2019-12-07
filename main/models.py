@@ -1,6 +1,11 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+from .fields import OrderField
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 
 class News(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Заголовок новости')
@@ -12,7 +17,7 @@ class News(models.Model):
         return self.title
 
     def total_likes(self):
-        return self.likes.count() 
+        return self.likes.count()
 
     class Meta:
         verbose_name_plural = 'Новости'
@@ -63,3 +68,80 @@ class Call(models.Model):
 
     def __str__(self):
         return 'Call on {} lesson'.format(self.lesson)
+
+class Subject(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Название предмета')
+    slug = models.SlugField(max_length=200, unique=True, verbose_name='Слаг')
+    class Meta:
+        ordering = ['title']
+        verbose_name='Предмет'
+        verbose_name_plural='Предметы'
+
+    def __str__(self):
+        return self.title
+
+class Course(models.Model):
+    owner = models.ForeignKey(User, related_name='courses_created', on_delete=models.CASCADE, verbose_name='Автор')
+    subject = models.ForeignKey(Subject, related_name='courses', on_delete=models.CASCADE, verbose_name='Предмет')
+    title = models.CharField(max_length=200, verbose_name='Название')
+    slug = models.SlugField(max_length=200, unique=True, verbose_name='Слаг')
+    overview = models.TextField(verbose_name='Описание')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
+    class Meta:
+        ordering = ['-created']
+        verbose_name='Курс'
+        verbose_name_plural='Курсы'
+
+    def __str__(self):
+        return self.title
+
+class Module(models.Model):
+    course = models.ForeignKey(Course, related_name='modules', on_delete=models.CASCADE, verbose_name='Курс')
+    title = models.CharField(max_length=200, verbose_name='Название')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    order = OrderField(blank=True, for_fields=['course'])
+    def __str__(self):
+        return '{}. {}'.format(self.order, self.title)
+    class Meta:
+        verbose_name='Модуль'
+        verbose_name_plural='Модули'
+        ordering = ['order']
+
+
+class Content(models.Model):
+    module = models.ForeignKey(Module, related_name='contents', on_delete=models.CASCADE, verbose_name='Модуль')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to={'model__in':('text', 'video', 'image', 'file')})
+    object_id = models.PositiveIntegerField()
+    item = GenericForeignKey('content_type', 'object_id')
+    order = OrderField(blank=True, for_fields=['module'])
+    class Meta:
+        verbose_name='Контент'
+        verbose_name_plural='Контент'
+        ordering = ['order']
+
+
+class ItemBase(models.Model):
+    owner = models.ForeignKey(User, related_name='%(class)s_related', on_delete=models.CASCADE, verbose_name='Автор')
+    title = models.CharField(max_length=250, verbose_name='Название')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.title
+
+    def render(self):
+        return render_to_string('courses/content/{}.html'.format(self._meta.model_name), {'item': self}) 
+
+class Text(ItemBase):
+    content = models.TextField(verbose_name='Содержание')
+
+class File(ItemBase):
+    file = models.FileField(upload_to='files', verbose_name='Файл')
+class Image(ItemBase):
+    file = models.FileField(upload_to='images', verbose_name='Изображение')
+
+class Video(ItemBase):
+    url = models.URLField(verbose_name='URL Видео')

@@ -1,0 +1,107 @@
+body {
+  background-color: #fff !important;
+}
+
+#sidebar {
+  background: #ededed;
+  color: #000;
+}
+
+#dismiss{
+  background: #e4e4e4;
+}
+
+#dismiss:hover {
+  background: #8a8a8a;
+  color: #fff;
+}
+
+#sidebar .sidebar-header {
+  background: #ffffff;
+}
+
+#sidebar ul.components {
+  border-bottom: 1px solid #8a8a8a;
+}
+
+#sidebar ul p {
+  color: #757575;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: #6a6a6a;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #000;
+    background: #c9c9c9;
+}
+
+ul ul a {
+    background: #e2e2e2;
+}
+
+
+#sidebar a {
+  color: #000;
+}
+
+.dark {
+  background-color: #fff !important;
+  border-bottom:6px solid #c1c1c1;
+}
+
+.dark a {
+  color: black !important;
+}
+
+.paginator {
+  color: black !important;
+}
+
+.textar {
+  background-color: #f0f0f0 !important;
+  border-color: #cfcfcf !important;
+  color: #000000 !important;
+}
+
+.btn-hover.color-8 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.shedule-text, .about, .password, .news-text, .password-change, .detail{
+  color: black;
+}
+
+.dislike {
+  color: #2400ff;
+}
+.like {
+  color: #333333;
+}
+.like:hover {
+  color: #333333;
+}
+.dislike:hover {
+  color: #2400ff;
+}
+.comment .info {
+    color:#666;
+}
+.comment:nth-child(even) {
+    background:#efefef;
+}
+
+.comment {
+  color: black;
+}
+
+.module-head{
+  background:#efefef;
+}
+.cours a{
+  color: #606bff
+}

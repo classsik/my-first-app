@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+{% block title %}Мои курсы{% endblock %}
+{% block content %}
+  <h1 class='module-head mb-2 shrift'>Мои курсы</h1>
+  <div class="module shrift">
+    <div class="row mx-auto justify-content-sm-center justify-content-md-start">
+      <div class="col-sm-10 col-xl-3 pl-3">
+        {% for course in object_list %}
+          <div class="course-info border px-2 mb-2">
+            <h3 class='mt-1'>{{ course.title }}</h3>
+            <p class='list-course'>
+              <a href="{% url "main:course_edit" course.id %}"><button type="button" name="button" class="btn-hover color-8 m-0 mb-1">Редактировать</button></a>
+              <a href="{% url "main:course_module_update" course.id %}"><button type="button" name="button" class="btn-hover color-8 m-0 mb-1">Редактировать модули</button></a>
+              {% if course.modules.count > 0 %}
+                <a href="{% url "main:module_content_list" course.modules.first.id %}"
+                ><button type="button" name="button" class="btn-hover color-8 m-0 mb-1">Управление содержимым</button></a>
+              {% endif %}
+              <a href="{% url "main:course_delete" course.id %}"><button type="button" name="button" class="btn-hover color-11 m-0 mb-1">Удалить</button></a>
+            </p>
+          </div>
+        {% empty %}
+          <p>У вас нет курсов. Создайте!</p>
+        {% endfor %}
+      </div>
+    </div>
+    <p class='pl-3'>
+      <a href="{% url 'main:course_create' %}"><button type="button" name="button" class='btn-hover color-5 m-0'>Создать новый курс</button></a>
+    </p>
+  </div>
+{% endblock %}

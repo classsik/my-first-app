@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+{% block title %}
+{% if subject %}
+  Курсы по предмету {{ subject.title }}
+{% else %}
+  Все курсы
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1 class='module-head shrift'>
+  {% if subject %}
+    Курсы по предмету {{ subject.title }}
+  {% else %}
+    Все курсы
+  {% endif %}
+</h1>
+<div class="row mx-auto">
+  <div class="contents h-100">
+    <h3 class="shrift">Предметы</h3>
+    <ul id="modules">
+      <li {% if not subject %}class="selected"{% endif %}>
+        <a href="{% url "main:course_list" %}">Все</a>
+      </li>
+      {% for s in subjects %}
+        <li {% if subject == s %}class="selected"{% endif %}>
+          <a href="{% url "main:course_list_subject" s.slug %}">
+            {{ s.title }}
+            <br><span>{% if s.total_courses == 1 %}{{ s.total_courses }} курс{% elif s.total_courses > 1 %}{{ s.total_courses }} курса{% elif s.total_courses > 4 %}{{ s.total_courses }} курсов{% endif %}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="modul px-3 pt-1 mt-2 cours">
+    {% for course in courses %}
+      {% with subject=course.subject %}
+        <div class="list-course border p-1 mb-1">
+          <h4 class='shrift'><a href="{% url "main:course_detail" course.slug %}">{{ course.title }}</a></h4>
+          <p>
+            <a href="{% url "main:course_list_subject" subject.slug %}">{{ subject }}.</a>
+            {% if course.total_modules == 1 %}{{ course.total_modules }} модуль.{% elif course.total_modules > 1 %}{{ course.total_modules }} модуля.{% elif course.total_modules > 4 or course.total_modules == 0 %}{{ course.total_modules }} модулей.{% endif %}
+            Создатель: {{ course.owner.get_full_name }}
+          </p>
+        </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

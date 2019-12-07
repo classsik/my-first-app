@@ -3,14 +3,16 @@
 {% block title %}Регистрация{% endblock %}
 
 {% block content %}
-<div class="border-bottom register mt-2 text-center">
+<div class="password mt-2 text-center">
   <h1>Регистрация нового пользователя.</h1>
 </div>
-<div class="container-fluid mx-auto mb-3 mt-2">
+<div class="container-fluid mx-auto mb-3 mt-2 password-change">
   <form method="post">
     {% csrf_token %}
-    {% bootstrap_form form layout='horizontal'%}
-    <button type="submit" class="btn btn-info btn-block">Создать</button>
+    <div class="password-form">
+      {% bootstrap_form form layout='horizontal'%}
+    </div>
+    <button type="submit" class="btn-hover btn-block color-8 mx-auto shrift">Создать</button>
   </form>
 </div>
 {% endblock %}

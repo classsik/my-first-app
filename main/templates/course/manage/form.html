@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+{% load bootstrap4 %}
+{% block title %}
+  {% if object %}
+    Редактировать курс "{{ object.title }}"
+  {% else %}
+    Создать новый курс
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <h1 class='module-head shrift'>
+    {% if object %}
+      Редактировать курс "{{ object.title }}"
+    {% else %}
+      Создать новый курс
+    {% endif %}
+  </h1>
+  <div class="module shrift mt-2">
+    <h2 class="ml-3 course-info">Информация о курсе</h2>
+    <form action="." method="post">
+      <div class="container-fluid">
+        <div class="enter">
+          {% bootstrap_form form layout='inline'%}
+        </div>
+        {% csrf_token %}
+        <p><input type="submit" value="Сохранить" class="btn-hover color-8 m-0"></p>
+      </div>
+    </form>
+  </div>
+{% endblock %}

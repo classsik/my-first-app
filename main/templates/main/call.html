@@ -1,18 +1,18 @@
 {% extends 'layout/base.html' %}
 {% block title %}Расписание звонков{% endblock %}
 {% block content %}
-<div class="text-center border-bottom shedule-text mt-1">
+<div class="text-center shedule-text mt-1">
   <h1>Расписание звонков</h1>
 </div>
 <div class="row justify-content-center mx-auto">
   <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2 my-3">
-    <div class="card" style="width: 18rem;">
-      <div class="card-header">
+    <div class="card cards" style="width: 18rem;">
+      <div class="card-header cards-header">
         Расписание звонков
       </div>
       <ul class="list-group list-group-flush">
         {% for i in call %}
-          <li class="list-group-item">{{ i.lesson }}) Начало {{ i.start }} Конец {{ i.end }}</li>
+          <li class="list-group-item cards">{{ i.lesson }}) Начало {{ i.start }} Конец {{ i.end }}</li>
         {% endfor %}
       </ul>
     </div>

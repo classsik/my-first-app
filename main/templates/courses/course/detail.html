@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block content %}
+{% with subject=course.subject %}
+  <h1 class='module-head shrift'>{{ object.title }}</h1>
+  <div class="module px-2 shrift pt-2 detail-cours">
+    <h2>Краткий обзор</h2>
+    <p>
+      <a href="{% url "main:course_list_subject" subject.slug %}">{{ subject.title }}.</a>
+      {% if course.modules.count == 1 %}{{ course.modules.count }} модуль{% elif course.modules.count > 1 %}{{ course.modules.count }} модуля{% elif course.modules.count > 4 %}{{ course.modules.count }} модулей{% endif %}
+      Создатель: {{ course.owner.get_full_name }}
+    </p>
+    Описание:
+    {{ object.overview|linebreaks }}
+    <form action="{% url "student_enroll_course" %}" method="post">
+      {{ enroll_form }}
+      {% csrf_token %}
+      <input type="submit" class="btn-hover color-8 m-0" value="Просмотреть">
+    </form>
+  </div>
+{% endwith %}
+{% endblock %}

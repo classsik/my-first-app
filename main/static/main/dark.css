@@ -1,0 +1,170 @@
+body {
+  background-color: #121212 !important;
+}
+
+#sidebar {
+  background: #1b1b1b;
+  color: #fff;
+}
+
+#dismiss{
+  background: #1b1b1b;
+}
+
+#dismiss:hover {
+    background: #fff;
+    color: #000;
+}
+
+#sidebar .sidebar-header {
+  background: #2f2f2f;
+}
+
+#sidebar ul.components {
+    border-bottom: 1px solid #ffffff;
+}
+
+#sidebar ul p {
+    color: #fff;
+}
+
+#sidebar ul li a:hover {
+    color: #000;
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #5e5e5e;
+}
+
+ul ul a {
+    background: #242424;
+}
+
+.jumbotron {
+  color: white;
+  background-color: #222222 !important;
+}
+
+#sidebar a {
+  color: #fff;
+}
+
+.dark {
+  background-color: #121212 !important;
+  border-bottom:6px solid #8b8b8b;
+}
+
+.dark a {
+  color: white !important;
+}
+
+.cards {
+  background-color: #201f1f !important;
+  color: white;
+}
+
+.cards hr {
+  background-color: white !important;
+}
+.cards-header{
+  background-color: #2e2d2d !important
+}
+.cards-footer{
+  background-color: #252525 !important;
+
+}
+.newss {
+  background-color: #222 !important;
+}
+
+.paginator {
+  background-color: #3d3d3d !important;
+  border-color: #3d3d3d !important;
+}
+
+.paginator-active {
+  border-color: #747474 !important;
+  background-color: #747474 !important;
+}
+
+.textar {
+  background-color: #302f2f !important;
+  border-color: #302f2f !important;
+  color: #fff !important;
+}
+
+.btn-hover.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+
+.shedule-text, .about, .password, .password-change, .news-text, .detail{
+  color: white;
+}
+
+.password-form input {
+  background-color: #302f2f !important;
+  border-color: #302f2f !important;
+}
+
+.dislike {
+  color: #2400ff;
+}
+.like {
+  color: #ffffff;
+}
+.like:hover {
+  color: #ffffff;
+}
+.dislike:hover {
+  color: #2400ff;
+}
+
+.comment .info {
+    color:#c1c1c1;
+}
+
+.comment:nth-child(even) {
+    background:#535353;
+}
+
+.module-head{
+  background:#4b4b4b;
+  color: white;
+}
+
+.cours {
+  color: white;
+}
+
+.cours a{
+  color: #939393
+}
+
+.detail-cours, .student-view, .course-info {
+  color: white;
+}
+
+.enter textarea {
+  background-color: #302f2f !important;
+  border-color: #302f2f !important;
+  color: #fff !important;
+}
+
+.enter input {
+  background-color: #302f2f !important;
+  border-color: #302f2f !important;
+  color: white !important;
+}
+
+.enter select option {
+  color: white;
+}
+.enter select {
+  background-color: #302f2f !important;
+  border-color: #302f2f !important;
+  color: white;
+}

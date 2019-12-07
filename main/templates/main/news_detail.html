@@ -1,23 +1,24 @@
 {% extends 'layout/base.html' %}
+{% load bootstrap4 %}
 {% block title %}{{ news.title }}{% endblock %}
 {% block content %}
 <div class="text-center detail">
-  <div class="border-bottom mt-2">
+  <div class="mt-2">
     <h1>{{ news.title }}</h1>
   </div>
   <div class='row justify-content-center mx-auto'>
-    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-4 col-xl-4 mt-2">
+    <div class="col-xs-10 col-sm-10 col-md-6 col-lg-4 col-xl-4 mt-1">
         {% if news.image %}<img src="{{news.image.url}}" class='w-100 rounded'>{% endif %}
     </div>
   </div>
   <p class='mt-1'>{{ news.body }}</p>
   <p class='text-muted'>{{ news.published }}</p>
-  <div id="like-section" class="mb-1 border-top">
+  <div id="like-section" class="">
     {% include 'main/like_section.html' %}
   </div>
 </div>
-<div class="border-top mb-1"></div>
-<div class="commentaries">
+<hr style='background-color: #777' class="mb-1">
+<div class="commentaries text-white">
   {% with comments.count as total_comments %}
     <h2 class='text-center'>Комментарии: {{ total_comments }}</h2>
   {% endwith %}
@@ -34,14 +35,18 @@
   {% endfor %}
 
   {% if new_comment %}
-    <h2 class="text-center">Комментарий добавлен.</h2>
+    <h2 class="text-center mt-2">Комментарий добавлен.</h2>
   {% else %}
     <h2 class='text-center mt-2'>Добавить новый комментарий</h2>
     <h5 class='text-center'>Введите текст комментария</h5>
-    <form action="." method="post" class='text-center'>
-      {{ comment_form.body }}
+    <form action="." method="post" class='container-fluid text-center'>
+      <div class="form-group">
+        <label class="sr-only" for="id_body">Текст</label>
+        <textarea name="body" cols="40" rows="10" class="form-control textar" placeholder="Текст" title="" required="" id="id_body"></textarea>
+      </div>
       {% csrf_token %}
-      <p  class='text-center'><input type="submit" value="Добавить"></p>
+      <button class="btn-hover color-8 m-0" type="
+      ">Отправить</button>
     </form>
   {% endif %}
 </div>

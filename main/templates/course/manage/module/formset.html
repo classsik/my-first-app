@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+{% load bootstrap4 %}
+{% block title %}Редактирование "{{ course.title }}" {% endblock %}
+{% block content %}
+  <h2 class="module-head shrift">Редактирование "{{ course.title }}"</h2>
+  <div class="module shrift course-info">
+    <h2 class='mt-1 ml-3'>Модули курса</h2>
+    <form action="" method="post" class="container-fluid">
+      <div class="enter">
+        {% bootstrap_formset formset layout='inline' %}
+      </div>
+      {{ formset.management_form }}
+      {% csrf_token %}
+      <button type="submit" name="button" class="btn-hover color-8 m-0">Сохранить</button>
+    </form>
+  </div>
+{% endblock %}

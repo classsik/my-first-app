@@ -4,57 +4,69 @@
 <div class="index">
   <div class="jumbotron mb-3">
     <h1 class="display-4 text-center info-text">Добро пожаловать!</h1>
-    <hr class="">
-    <p class="lead text-center">Добро пожаловать на сайт 7В класса. Мы рады приветствовать тебя здесь. На этом сайте ты можешь узнать последние новости класса и расписание уроков.</p>
+    <hr style="background-color: #b9b9b9;">
+    <p class="lead text-center">Добро пожаловать на сайт 7В класса. Мы рады приветствовать тебя здесь. На этом сайте ты можешь узнать последние новости класса, раписание звонков и уроков, а также подучить предметы или расширить свои знания.</p>
   </div>
   <div class="container-fluid">
-    <div class="row  justify-content-center mx-auto">
+    <div class="row justify-content-center mx-auto">
       <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2">
-        <div class="card text-center mt-3 mb-3">
+        <div class="card text-center mt-3 mb-3 cards">
           <div class="card-body">
             <h5 class="card-title">Расписание</h5>
             <hr width='100%'>
             <p class="card-text">Узнайте расписание уроков на сегодня.</p>
-            <a href="{% url 'main:shedule' %}" class="btn btn-info">Перейти</a>
+            <a href="{% url 'main:shedule' %}"><button class="btn-hover color-8 m-0">Перейти</button></a>
           </div>
         </div>
       </div>
       <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2">
-        <div class="card text-center mt-3 mb-3">
+        <div class="card text-center mt-3 mb-3 cards">
           <div class="card-body">
             <h5 class="card-title">Новости</h5>
             <hr width='100%'>
             <p class="card-text">Узнайте последние новости класса.</p>
-            <a href="{% url 'main:news' %}" class="btn btn-info">Перейти</a>
+            <a href="{% url 'main:news' %}"><button class="btn-hover color-8 m-0">Перейти</button></a>
           </div>
         </div>
       </div>
       <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2">
-        <div class="card text-center mt-3 mb-3">
+        <div class="card text-center mt-3 mb-3 cards">
           <div class="card-body">
             <h5 class="card-title">О сайте</h5>
             <hr width='100%'>
             <p class="card-text">Узнайте информацию о нашем сайте.</p>
-            <a href="{% url 'main:other' page='about' %}" class="btn btn-info">Перейти</a>
+            <a href="{% url 'main:other' page='about' %}"><button class="btn-hover color-8 m-0">Перейти</button></a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2">
+        <div class="card text-center mt-3 mb-3 cards">
+          <div class="card-body">
+            <h5 class="card-title">Курсы</h5>
+            <hr width='100%'>
+            <p class="card-text">Пройдите курсы и расширьте свои знания.</p>
+            <a href="{% url 'main:course_list' %}"><button class="btn-hover color-8 m-0">Перейти</button></a>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid border-top border-bottom text-center newss">
-    <h3 class="mt-2">Последние новости:</h3>
+  <div class="container-fluid text-center newss">
+    <h3 class="py-2 text-white">Последние новости:</h3>
   </div>
   <div class="row justify-content-center mx-auto">
     {% for i in last %}
       <div class="col-xs-10 col-sm-10 col-md-4 col-lg-3 col-xl-2 my-3">
-        <div class="card">
-          <div class="card-header">
+        <div class="card cards">
+          <div class="card-header cards-header">
             {{ i.title }}
           </div>
           <div class="card-body">
             <p class="mb-2">{{ i.body }}</p>
           </div>
-          <div class="card-footer">
+          <div class="card-footer cards-footer">
             <p class="text-muted mb-1">{{ i.published }}</p>
           </div>
         </div>

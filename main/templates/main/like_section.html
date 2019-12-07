@@ -1,8 +1,8 @@
 <form action="{% url 'main:like_news'%}" method="post">
   {% csrf_token %}
   {% if is_liked %}
-    Нравиться<button type="submit" id="like" name="news_id" value="{{ news.id }}" class="fa fa-thumbs-up btn" style="color:blue;"></button>{{ total_likes }}
+    Нравиться<button type="submit" id="like" name="news_id" value="{{ news.id }}" class="fa fa-thumbs-up btn dislike"></button>{{ total_likes }}
   {% else %}
-    Нравиться<button type="submit" id="like" name="news_id" value="{{ news.id }}" class="btn fa fa-thumbs-up"></button>{{ total_likes }}
+    Нравиться<button type="submit" id="like" name="news_id" value="{{ news.id }}" class="fa fa-thumbs-up like btn"></button>{{ total_likes }}
   {% endif %}
 </form>

@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+{% block title %}Удаление курса{% endblock %}
+{% block content %}
+  <h1 class='module-head'>Удалить курс "{{ object.title }}"</h1>
+  <div class="module ml-2 mt-2 shrift course-info">
+    <form action="" method="post">
+      {% csrf_token %}
+      <p>Вы точно хотите удалить "{{ object }}"?</p>
+      <input type="submit" class='btn btn-danger' value="Потвердить">
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %}
+{% load bootstrap4 %}
+{% block title %}
+  {% if object %}
+    Редактировать содержимое "{{ object.title }}"
+  {% else %}
+    Добавить новое содержимое
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <h1 class='module-head shrift'>
+    {% if object %}
+      Редактировать содержимое "{{ object.title }}"
+    {% else %}
+      Добавить новое содержимое
+    {% endif %}
+  </h1>
+  <div class="module shrift course-info">
+    <h2 class='ml-3 mt-2'>Информация курса</h2>
+    <form action="" method="post" enctype="multipart/form-data" class="container-fluid">
+      <div class="col-sm-10 col-lg-3 p-0 enter">
+        {% bootstrap_form form layout='vertical'%}
+      </div>
+      {% csrf_token %}
+      <button type="submit" name="button" class="btn-hover color-8 m-0">Сохранить содержимое</button>
+    </form>
+  </div>
+{% endblock %}
